@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class FPSPlayerController : BaseGameObject
 {
+    public static FPSPlayerController FPSPlayerInstance{
+        get {
+            return _instance;
+        }
+    }
 
     public CharacterController characterController;
 
@@ -13,13 +18,13 @@ public class FPSPlayerController : BaseGameObject
 
     public float gravity;
 
+    private static FPSPlayerController _instance;
 
-    // Use this for initialization
-    void Start()
-    {
-
+    
+    void Awake(){
+        _instance = this;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -35,5 +40,9 @@ public class FPSPlayerController : BaseGameObject
 		}
 
             characterController.Move(Time.deltaTime * (movementSpeed * movement - gravity * Vector3.up));
+    }
+
+    public void Damage(float damage){
+        Debug.Log("Damaged by " + damage);
     }
 }
