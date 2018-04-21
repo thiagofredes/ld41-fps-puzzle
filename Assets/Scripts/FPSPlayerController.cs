@@ -20,8 +20,10 @@ public class FPSPlayerController : BaseGameObject {
 	void Update () {
 		float forward = Input.GetAxis("Vertical");
 		float sidestep = Input.GetAxis("Horizontal");
-		Vector3 movement = forward * FPSCamera.CameraForwardVectorOnGround + sidestep * FPSCamera.CameraRightVectorOnGround;
+		Vector3 movement = forward * FPSCamera.CameraForwardVectorOnGround + 
+							sidestep * FPSCamera.CameraRightVectorOnGround;
 
+		transform.forward = FPSCamera.CameraForwardVectorOnGround;
 		characterController.Move(Time.deltaTime * (movementSpeed * movement - gravity * Vector3.up));
 	}
 }

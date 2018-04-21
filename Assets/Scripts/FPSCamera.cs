@@ -11,7 +11,7 @@ public class FPSCamera : BaseGameObject
         {
             Vector3 forwardOnGround = _instance.transform.forward;
             forwardOnGround.y = 0f;
-            return forwardOnGround;
+            return forwardOnGround.normalized;
         }
     }
 
@@ -21,9 +21,12 @@ public class FPSCamera : BaseGameObject
         {
             Vector3 rightOnGround = _instance.transform.right;
             rightOnGround.y = 0f;
-            return rightOnGround;
+            return rightOnGround.normalized;
         }
     }
+	public FPSPlayerController playerController;
+
+	public Vector3 playerPositionOffset;
 
     public float sensitivityX = 10f;
 
@@ -63,8 +66,10 @@ public class FPSCamera : BaseGameObject
     void LateUpdate()
     {
         _currentY = Mathf.Clamp(_currentY, minAngleY, maxAngleY);
-        this.transform.localRotation = Quaternion.Euler(
-                                        (invertAxisY ? -1f : 1f) * _currentY,
-                                        _currentX, 0f);
+        this.transform.rotation = Quaternion.Euler(
+                                        (invertAxisY ? -1 : 1) * _currentY,
+                                        _currentX,
+										0f);
+		transform.position = playerController.transform.position + playerPositionOffset;
     }
 }
