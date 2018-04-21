@@ -1,0 +1,9 @@
+Library/
+Temp/
+Build[s]/
+*/_3d
+*/_audio
+.vscode
+*.sln
+*.csproj
+obj/
