@@ -3,42 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour {
+public class EnemyController : BaseGameObject
+{
 
-	public NavMeshAgent navMeshAgent;
+    public NavMeshAgent navMeshAgent;
 
-	public float shootingDistance;
+    public float shootingDistance;
 
-	public float shootingAngle;
+    public float shootingAngle;
 
-	public float timeBetweenShots;
+    public float timeBetweenShots;
 
-	public float shotProbability;
+    public float shotProbability;
 
-	public float shotDamage;
+    public float shotDamage;
 
-	private EnemyState movementState;
+    private EnemyState movementState;
 
-	private EnemyState shootState;
+    private EnemyState shootState;
 
-	private float _nextShotTime;
+    private float _nextShotTime;
 
 
-	void Start(){
-		movementState = new EnemyStateFollowing(this);
-		shootState = new EnemyStateShooting(this);
-		_nextShotTime = 0f;
-	}
+    void Start()
+    {
+        movementState = new EnemyStateFollowing(this);
+        shootState = new EnemyStateShooting(this);
+        _nextShotTime = 0f;
+    }
 
-	void Update(){
-		movementState.Update();
-		shootState.Update();
-	}
+    void Update()
+    {
+        if (!gamePaused && !gameEnded)
+        {
+            movementState.Update();
+            shootState.Update();
+        }
+    }
 
-	public void Shoot(Vector3 targetPosition){
-		if(Time.time >= _nextShotTime){
-			_nextShotTime = Time.time + timeBetweenShots;
-			FPSPlayerController.FPSPlayerInstance.Damage(shotDamage);
-		}
-	}
+    public void Shoot(Vector3 targetPosition)
+    {
+        if (Time.time >= _nextShotTime)
+        {
+            _nextShotTime = Time.time + timeBetweenShots;
+            FPSPlayerController.FPSPlayerInstance.Damage(shotDamage);
+        }
+    }
 }
