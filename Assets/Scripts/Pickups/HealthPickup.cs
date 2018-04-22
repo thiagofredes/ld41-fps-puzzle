@@ -6,8 +6,18 @@ public class HealthPickup : Pickup {
 
     public AudioSource audioSource;
 
+    public AudioClip healthClip;
+
 	protected override void OnContactDo(){
         FPSPlayerController.FPSPlayerInstance.AddHealth(2);
-        audioSource.Play();
+        audioSource.PlayOneShot(healthClip);
+        StartCoroutine(WaitForSoundToPlay());
+    }
+
+    private IEnumerator WaitForSoundToPlay(){
+        YieldInstruction endOfFrame = new WaitForEndOfFrame();
+        while(audioSource.isPlaying)
+            yield return endOfFrame;
+        Destroy(gameObject);
     }
 }

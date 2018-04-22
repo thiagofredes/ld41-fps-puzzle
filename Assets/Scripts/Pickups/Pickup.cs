@@ -14,8 +14,7 @@ public class Pickup : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		FPSPlayerController playerController = other.GetComponent<FPSPlayerController>();
 		if(playerController != null){
-			OnContactDo();
-			Destroy(gameObject);
+			OnContactDo();			
 		}
 	}
 
