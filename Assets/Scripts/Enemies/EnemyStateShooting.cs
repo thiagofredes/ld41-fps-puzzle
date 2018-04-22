@@ -13,7 +13,6 @@ public class EnemyStateShooting : EnemyState {
 
         if(distance <= enemyRef.shootingDistance && angle <= enemyRef.shootingAngle && Random.value <= enemyRef.shotProbability){
             enemyRef.Shoot(FPSPlayerController.FPSPlayerInstance.transform.position);
-        }
-
+        }        
     }
 }

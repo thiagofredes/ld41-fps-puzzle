@@ -9,4 +9,6 @@ public class EnemyState {
     public virtual void Update(){}
 
     public virtual void OnExit(){}
+
+    public virtual void Stop(){}
 }

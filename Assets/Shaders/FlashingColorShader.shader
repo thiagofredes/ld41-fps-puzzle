@@ -52,7 +52,7 @@
 				fixed4 col = tex2D(_MainTex, i.uv);
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);
-				return col * (1.5 - _FlashMultiplier) + clamp(_FlashMultiplier - 0.5, 0, 0.5) * _FlashColor;
+				return col * clamp(1.5 - _FlashMultiplier, 0.5, 1) + clamp(_FlashMultiplier - 0.5, 0, 0.5) * _FlashColor;
 			}
 			ENDCG
 		}

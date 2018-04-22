@@ -99,7 +99,7 @@ public class PuzzleSolver : MonoBehaviour
         if (_currentStep == _totalSteps)
         {
             _currentLevel++;
-            if (_currentLevel == maxLevels)
+            if (_currentLevel >= maxLevels)
             {
                 Debug.Log("GAME ENDED! CONGRATS");
                 GameManager.EndGame(true);

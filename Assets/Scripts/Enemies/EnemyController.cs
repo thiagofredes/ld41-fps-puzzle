@@ -48,6 +48,9 @@ public class EnemyController : BaseGameObject
                 movementState.Update();
                 shootState.Update();
             }
+            else{
+                movementState.Stop();                
+            }
             yield return endOfFrame;
         }
     }

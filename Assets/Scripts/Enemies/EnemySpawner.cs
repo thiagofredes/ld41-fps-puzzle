@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : BaseGameObject
 {
     // helper class to aid in specifing thing in inspector
     [System.Serializable]
@@ -76,34 +76,37 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnemyKilled(EnemyController enemy)
     {
-        ExecutePuzzleStepAfterDeathAction puzzlePiece = enemy.afterDeath as ExecutePuzzleStepAfterDeathAction;
-        
-        enemy.EnemyKilled -= OnEnemyKilled;
-        _enemiesAlive[puzzlePiece.piece]--;
-
-        if (puzzlePiece != null)
+        if (!gameEnded && !gamePaused)
         {
-            if (_enemiesAlive[puzzlePiece.piece] < _enemiesRestriction[puzzlePiece.piece])
-            {
-                GameObject newEnemy = Instantiate(enemyPrefab, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity);
-                GameObject puzzlePc = Instantiate(puzzlePieceSpawnerPrefab, newEnemy.transform.position, Quaternion.identity);
-                ExecutePuzzleStepAfterDeathAction puzzleAfterAction;
-                EnemyController enemyController = newEnemy.GetComponent<EnemyController>();
-                puzzlePc.transform.parent = newEnemy.transform;
-                puzzlePc.transform.localPosition = Vector3.zero;
-                puzzleAfterAction = puzzlePc.GetComponent<ExecutePuzzleStepAfterDeathAction>();
-                puzzleAfterAction.piece = puzzlePiece.piece;
-                enemyController.afterDeath = puzzleAfterAction;
-                enemyController.EnemyKilled += OnEnemyKilled;
+            ExecutePuzzleStepAfterDeathAction puzzlePiece = enemy.afterDeath as ExecutePuzzleStepAfterDeathAction;
 
-                _enemiesAlive[puzzlePiece.piece]++;
+            enemy.EnemyKilled -= OnEnemyKilled;
+            _enemiesAlive[puzzlePiece.piece]--;
+
+            if (puzzlePiece != null)
+            {
+                if (_enemiesAlive[puzzlePiece.piece] < _enemiesRestriction[puzzlePiece.piece])
+                {
+                    GameObject newEnemy = Instantiate(enemyPrefab, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity);
+                    GameObject puzzlePc = Instantiate(puzzlePieceSpawnerPrefab, newEnemy.transform.position, Quaternion.identity);
+                    ExecutePuzzleStepAfterDeathAction puzzleAfterAction;
+                    EnemyController enemyController = newEnemy.GetComponent<EnemyController>();
+                    puzzlePc.transform.parent = newEnemy.transform;
+                    puzzlePc.transform.localPosition = Vector3.zero;
+                    puzzleAfterAction = puzzlePc.GetComponent<ExecutePuzzleStepAfterDeathAction>();
+                    puzzleAfterAction.piece = puzzlePiece.piece;
+                    enemyController.afterDeath = puzzleAfterAction;
+                    enemyController.EnemyKilled += OnEnemyKilled;
+
+                    _enemiesAlive[puzzlePiece.piece]++;
+                }
             }
         }
     }
 
     private int ChooseSpawnPoint()
     {
-        int index = 0;        
+        int index = 0;
         float largestAngle = 0f;
 
         for (int sp = 0; sp < spawnPoints.Length; sp++)
