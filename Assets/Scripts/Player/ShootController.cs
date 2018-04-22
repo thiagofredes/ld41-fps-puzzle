@@ -18,6 +18,8 @@ public class ShootController : MonoBehaviour {
 
 	public AudioClip shotClip;
 
+	public LineRenderer shotLine;
+
 
 	void Awake(){
 		nextShotTime = 0f;
@@ -33,13 +35,22 @@ public class ShootController : MonoBehaviour {
 	private IEnumerator BulletCoroutine(){
 		Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2f, Screen.height/2f));
 		RaycastHit raycastHit;
-		YieldInstruction endOfFrame = new WaitForEndOfFrame();		
+		YieldInstruction endOfFrame = new WaitForEndOfFrame();
+
+		shotLine.SetPosition(0, shotOrigin.position);
+		shotLine.SetPosition(1, shotOrigin.position + shotOrigin.forward * bulletSpeed);		
+		shotLine.enabled = true;
 
 		while(!Physics.Raycast(ray.origin, ray.direction, out raycastHit, bulletSpeed, ~LayerMask.GetMask("Player", "Weapon"))){
 			yield return endOfFrame;
-			ray.origin = ray.origin + ray.direction.normalized * bulletSpeed;
-			Debug.DrawRay(ray.origin, ray.direction * bulletSpeed, Color.magenta);
+			shotLine.SetPosition(0, ray.origin);
+			ray.origin = ray.origin + ray.direction.normalized * bulletSpeed;			
+			shotLine.SetPosition(1, ray.origin);
 		}
+
+		shotLine.enabled = false;
+		shotLine.SetPosition(0, shotOrigin.position);
+		shotLine.SetPosition(1, shotOrigin.position);
 
 		EnemyController enemy = raycastHit.transform.GetComponent<EnemyController>();
 		if(enemy != null){
