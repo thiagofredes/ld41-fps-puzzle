@@ -517,10 +517,10 @@ GameObject:
   m_Component:
   - component: {fileID: 831457201}
   - component: {fileID: 831457204}
-  - component: {fileID: 831457203}
   - component: {fileID: 831457202}
+  - component: {fileID: 831457203}
   m_Layer: 9
-  m_Name: Capsule
+  m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -554,7 +554,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 257956e16247b5c44b99c50330af3695, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -574,8 +574,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &831457203
-CapsuleCollider:
+--- !u!65 &831457203
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -583,9 +583,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &831457204
 MeshFilter:
@@ -593,7 +592,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 831457200}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &878543306
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,7 +778,7 @@ RectTransform:
   m_GameObject: {fileID: 1063855500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.125, y: 0.125, z: 1}
   m_Children: []
   m_Father: {fileID: 526952592}
   m_RootOrder: 0
@@ -808,7 +807,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 00a5f4f59d15adb4bbe44593c7e0c2ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de9282f4d87b32140b59ccf50653b70e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -867,7 +866,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.71
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -1166,7 +1165,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 257956e16247b5c44b99c50330af3695, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1712,7 +1711,7 @@ MonoBehaviour:
   - {fileID: 553706403}
   - {fileID: 2018626690}
   - {fileID: 516033274}
-  enemyPrefab: {fileID: 1932697584101356, guid: fc5fe16f25352d545bcdd456d6725173,
+  enemyPrefab: {fileID: 1546204387012888, guid: c538c96b646d5b845884eb15821e1fac,
     type: 2}
   ammoSpawnerPrefab: {fileID: 1988756817344830, guid: e8a3adba4bff4b34cb6702cf2f731e54,
     type: 2}
