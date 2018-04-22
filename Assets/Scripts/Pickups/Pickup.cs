@@ -20,8 +20,8 @@ public class Pickup : MonoBehaviour {
 	}
 
 	void Update(){
-		transform.position += Time.deltaTime * new Vector3(0f, 0.5f*Mathf.Sin(Time.time), 0f);
-		transform.Rotate(0f, Time.deltaTime * 15f, 0f);
+		transform.position += Time.deltaTime * new Vector3(0f, 0f, 0.5f*Mathf.Sin(Time.time));
+		transform.Rotate(0f, 0f, Time.deltaTime * 15f);
 	}
 
 	protected virtual void OnContactDo(){}

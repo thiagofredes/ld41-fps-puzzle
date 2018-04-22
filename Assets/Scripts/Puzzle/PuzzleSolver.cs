@@ -46,7 +46,7 @@ public class PuzzleSolver : BaseGameObject
         _totalSteps = 3;
         SetupLevel();
         StartCoroutine(GiveTips());
-        enemySpawner.SpawnInit();
+        enemySpawner.Spawn(_levelPieces);
     }
 
     private void SetupLevel()
@@ -118,6 +118,7 @@ public class PuzzleSolver : BaseGameObject
                 Shader.SetGlobalFloat("_FlashMultiplier", 0f);
                 _totalSteps = Random.Range(2 + _currentLevel, 3 + _currentLevel);
                 SetupLevel();
+                enemySpawner.Spawn(_levelPieces);
                 StartCoroutine(GiveTips());
             }
         }

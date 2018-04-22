@@ -8,6 +8,7 @@ public class SpawnLifeAfterDeathAction : AfterDeathAction
 
     public override void Execute(Vector3 spawnPosition)
     {
-        Instantiate(lifePrefab, spawnPosition + offset, Quaternion.identity);
+        if(Random.value > 0.7f)
+            Instantiate(lifePrefab, spawnPosition + offset, lifePrefab.transform.rotation);
     }
 }

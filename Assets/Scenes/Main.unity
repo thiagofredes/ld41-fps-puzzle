@@ -1699,13 +1699,6 @@ MonoBehaviour:
   gamePaused: 0
   gameEnded: 0
   gameResumed: 0
-  spawnRestrictions:
-  - piece: {fileID: 11400000, guid: 3e4e2091aa5b1774faaff978de14f458, type: 2}
-    number: 1
-  - piece: {fileID: 11400000, guid: 4de1d3df770363046b177bbba7696e67, type: 2}
-    number: 1
-  - piece: {fileID: 11400000, guid: 6a35b129cf19c4a438c8c9e105d73fad, type: 2}
-    number: 1
   spawnPoints:
   - {fileID: 1278682850}
   - {fileID: 553706403}
@@ -1713,11 +1706,11 @@ MonoBehaviour:
   - {fileID: 516033274}
   enemyPrefab: {fileID: 1546204387012888, guid: c538c96b646d5b845884eb15821e1fac,
     type: 2}
-  ammoSpawnerPrefab: {fileID: 1988756817344830, guid: e8a3adba4bff4b34cb6702cf2f731e54,
-    type: 2}
-  healthSpawnerPrefab: {fileID: 1518903827834488, guid: 39a3998b20acabe4b9f3d5a048f38dd5,
+  lifePickupPrefab: {fileID: 1589094349324744, guid: 0518bdf83396f844daf2f56e0a6de3df,
     type: 2}
   puzzlePieceSpawnerPrefab: {fileID: 1519420024041234, guid: f4cebb202de750c47b92f1ff8fc8cb6c,
+    type: 2}
+  puzzlePieceParticles: {fileID: 1922195757597614, guid: 1110e64341236494e8583223d0217a82,
     type: 2}
 --- !u!4 &2098123538
 Transform:
