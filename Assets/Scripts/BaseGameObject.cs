@@ -29,15 +29,16 @@ public abstract class BaseGameObject : MonoBehaviour
 
     protected virtual void OnGamePaused()
     {
+        gamePaused = true;
     }
 
     protected virtual void OnGameEnded(bool success)
     {
-
+        gameEnded = true;
     }
 
     protected virtual void OnGameResumed()
     {
-
+        gamePaused = false;
     }
 }

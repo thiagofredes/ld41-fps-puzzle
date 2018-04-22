@@ -63,11 +63,9 @@ public class EnemyController : BaseGameObject
 
     public void Damage(float damage)
     {
-        Debug.Log("Damaged by player");
         life -= damage;
         if (life <= 0)
         {
-            Debug.Log("ENEMY KILLED"); 
             afterDeath.Execute(transform.position);
 
             if (EnemyKilled != null)

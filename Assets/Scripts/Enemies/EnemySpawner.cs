@@ -41,9 +41,6 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void Start(){
-        SpawnInit();
-    }
 
     public void SpawnInit()
     {
