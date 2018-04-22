@@ -55,7 +55,6 @@ public class FPSPlayerController : BaseGameObject
 
     public void Damage(float damage)
     {
-        Debug.Log("Damaged by " + damage);
         life -= damage;
     }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzleSolver : MonoBehaviour
+public class PuzzleSolver : BaseGameObject
 {
 
     public int maxLevels;
@@ -53,6 +53,7 @@ public class PuzzleSolver : MonoBehaviour
         for (int p = 0; p < _totalSteps; p++)
         {
             _levelPieces[p] = possiblePieces[Random.Range(0, possiblePieces.Length)];
+            Debug.Log(_levelPieces[p].firewallRule);
         }
         _currentStep = 0;
     }
@@ -63,11 +64,14 @@ public class PuzzleSolver : MonoBehaviour
 
         while (true)
         {
-            foreach (PuzzlePiece p in _levelPieces)
+            if (!gameEnded && !gamePaused)
             {
-                Shader.SetGlobalColor("_FlashColor", p.firewallRule);
-                Shader.SetGlobalFloat("_FlashMultiplier", 0f);
-                yield return FlashColor();
+                foreach (PuzzlePiece p in _levelPieces)
+                {
+                    Shader.SetGlobalColor("_FlashColor", p.firewallRule);
+                    Shader.SetGlobalFloat("_FlashMultiplier", 0f);
+                    yield return FlashColor();
+                }
             }
             yield return waitTimeForTip;
         }
@@ -82,9 +86,12 @@ public class PuzzleSolver : MonoBehaviour
 
         while (t < flashTime)
         {
-            t += Time.deltaTime;
-            f = Mathf.Sin(t * 3.14f);
-            Shader.SetGlobalFloat("_FlashMultiplier", f);
+            if (!gameEnded && !gamePaused)
+            {
+                t += Time.deltaTime;
+                f = Mathf.Sin(t * 3.14f);
+                Shader.SetGlobalFloat("_FlashMultiplier", f);
+            }
             yield return endOfFrame;
         }
     }
@@ -108,7 +115,7 @@ public class PuzzleSolver : MonoBehaviour
             {
                 Debug.Log("NEXT LEVEL!");
                 StopAllCoroutines();
-                Shader.SetGlobalFloat("_FlashMultiplier", 0f);                
+                Shader.SetGlobalFloat("_FlashMultiplier", 0f);
                 _totalSteps = Random.Range(2 + _currentLevel, 3 + _currentLevel);
                 SetupLevel();
                 StartCoroutine(GiveTips());
