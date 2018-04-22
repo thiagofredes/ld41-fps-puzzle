@@ -36,6 +36,7 @@ public class PuzzleSolver : MonoBehaviour {
 	}
 
 	private void Solve(){
+		Debug.Log("CORRECT!");
 		_currentStep ++;
 	}
 

@@ -1,7 +1,8 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "PuzzlePiece", menuName = "Puzzle Piece", order = 1)]
 public class PuzzlePiece : ScriptableObject {
 
-    public string firewallRule;
+    public Color firewallRule;
 
 }
