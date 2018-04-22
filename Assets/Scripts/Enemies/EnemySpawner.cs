@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class EnemySpawner : MonoBehaviour
 {
     // helper class to aid in specifing thing in inspector
+    [System.Serializable]
     public class EnemySpawnerRestriction
     {
         public PuzzlePiece piece;
@@ -38,6 +39,10 @@ public class EnemySpawner : MonoBehaviour
             if (!_enemiesAlive.ContainsKey(spawnRestriction.piece))
                 _enemiesAlive.Add(spawnRestriction.piece, 0);
         }
+    }
+
+    void Start(){
+        SpawnInit();
     }
 
     public void SpawnInit()
@@ -77,6 +82,7 @@ public class EnemySpawner : MonoBehaviour
         ExecutePuzzleStepAfterDeathAction puzzlePiece = enemy.afterDeath as ExecutePuzzleStepAfterDeathAction;
         
         enemy.EnemyKilled -= OnEnemyKilled;
+        _enemiesAlive[puzzlePiece.piece]--;
 
         if (puzzlePiece != null)
         {
@@ -100,17 +106,16 @@ public class EnemySpawner : MonoBehaviour
 
     private int ChooseSpawnPoint()
     {
-        int index = 0;
-        float largestDistance = 0f;
+        int index = 0;        
         float largestAngle = 0f;
+
         for (int sp = 0; sp < spawnPoints.Length; sp++)
         {
             Vector3 playerSpawnPointVector = spawnPoints[sp].position - FPSPlayerController.FPSPlayerInstance.transform.position;
             float angle = Vector3.Angle(FPSPlayerController.FPSPlayerInstance.transform.forward, playerSpawnPointVector);
-            float distance = playerSpawnPointVector.magnitude;
-            if (distance > largestDistance && angle > largestAngle)
+
+            if (angle > largestAngle)
             {
-                largestDistance = distance;
                 largestAngle = angle;
                 index = sp;
             }
