@@ -18,6 +18,10 @@ public class FPSPlayerController : BaseGameObject
 
     public float gravity;
 
+    public float life;
+
+    public int ammo;
+
     private static FPSPlayerController _instance;
 
     
@@ -44,5 +48,16 @@ public class FPSPlayerController : BaseGameObject
 
     public void Damage(float damage){
         Debug.Log("Damaged by " + damage);
+        life -= damage;
+    }
+
+    public void AddAmmo(int amount){
+        Debug.Log("Ammo increased by " + amount);
+        ammo += amount;
+    }
+
+    public void AddHealth(int amount){
+        Debug.Log("Received health " + amount);
+        life += amount;
     }
 }

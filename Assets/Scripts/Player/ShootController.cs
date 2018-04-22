@@ -10,7 +10,10 @@ public class ShootController : MonoBehaviour {
 
 	public float bulletSpeed;
 
+	public float bulletDamage;
+
 	private float nextShotTime;
+
 
 	void Awake(){
 		nextShotTime = 0f;
@@ -35,10 +38,7 @@ public class ShootController : MonoBehaviour {
 
 		EnemyController enemy = raycastHit.transform.GetComponent<EnemyController>();
 		if(enemy != null){
-			Debug.Log("Shot enemy " + enemy.name);
-		}
-		else{
-			Debug.Log("Collision with " + raycastHit.transform.name);
+			enemy.Damage(bulletDamage);
 		}
 	}	
 }

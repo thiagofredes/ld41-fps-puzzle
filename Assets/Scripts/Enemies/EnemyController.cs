@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class EnemyController : BaseGameObject
 {
+    public event System.Action<EnemyController> EnemyKilled;
+
+    public AfterDeathAction afterDeath;
 
     public NavMeshAgent navMeshAgent;
 
@@ -18,6 +21,8 @@ public class EnemyController : BaseGameObject
 
     public float shotDamage;
 
+    public float life;
+
     private EnemyState movementState;
 
     private EnemyState shootState;
@@ -30,14 +35,20 @@ public class EnemyController : BaseGameObject
         movementState = new EnemyStateFollowing(this);
         shootState = new EnemyStateShooting(this);
         _nextShotTime = 0f;
+        StartCoroutine(UpdateStates());
     }
 
-    void Update()
+    IEnumerator UpdateStates()
     {
-        if (!gamePaused && !gameEnded)
+        YieldInstruction endOfFrame = new WaitForEndOfFrame();
+        while (true)
         {
-            movementState.Update();
-            shootState.Update();
+            if (!gamePaused && !gameEnded)
+            {
+                movementState.Update();
+                shootState.Update();
+            }
+            yield return endOfFrame;
         }
     }
 
@@ -47,6 +58,23 @@ public class EnemyController : BaseGameObject
         {
             _nextShotTime = Time.time + timeBetweenShots;
             FPSPlayerController.FPSPlayerInstance.Damage(shotDamage);
+        }
+    }
+
+    public void Damage(float damage)
+    {
+        Debug.Log("Damaged by player");
+        life -= damage;
+        if (life <= 0)
+        {
+            Debug.Log("ENEMY KILLED"); 
+            afterDeath.Execute(transform.position);
+
+            if (EnemyKilled != null)
+                EnemyKilled(this);
+            
+            StopAllCoroutines();
+            Destroy(gameObject);
         }
     }
 }
