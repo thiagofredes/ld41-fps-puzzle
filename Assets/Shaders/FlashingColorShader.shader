@@ -2,20 +2,22 @@
 {
 	Properties
 	{
-		_MainTex ("Texture", 2D) = "white" {}		
+		_MainTex ("Texture", 2D) = "white" {}
 	}
 	SubShader
 	{
-		Tags { "RenderType"="Opaque" }
+		Tags {"RenderType"="Opaque" "Queue"="Background" }
+
+		ZWrite Off
+		Cull Back
 		LOD 100
 
 		Pass
 		{
+
 			CGPROGRAM
 			#pragma vertex vert
-			#pragma fragment frag
-			// make fog work
-			#pragma multi_compile_fog
+			#pragma fragment frag			
 			
 			#include "UnityCG.cginc"
 
@@ -28,7 +30,6 @@
 			struct v2f
 			{
 				float2 uv : TEXCOORD0;
-				UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
 			};
 
@@ -42,17 +43,23 @@
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-				UNITY_TRANSFER_FOG(o,o.vertex);
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				// sample the texture
-				fixed4 col = tex2D(_MainTex, i.uv);
-				// apply fog
-				UNITY_APPLY_FOG(i.fogCoord, col);
-				return col * clamp(1.5 - _FlashMultiplier, 0.5, 1) + clamp(_FlashMultiplier - 0.5, 0, 0.5) * _FlashColor;
+				float2 distuv = float2(i.uv.x, i.uv.y + _Time.x);
+				fixed4 texColor = tex2D(_MainTex, distuv);
+				fixed4 finalColor;
+				fixed newAlphaFlashColor = _FlashMultiplier;
+
+				_FlashColor.a = newAlphaFlashColor;					
+				if(_FlashColor.a > 0)
+					finalColor = texColor * _FlashColor;
+				else
+					finalColor = texColor;
+
+				return finalColor;
 			}
 			ENDCG
 		}

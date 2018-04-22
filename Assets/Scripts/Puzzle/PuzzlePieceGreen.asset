@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Name: PuzzlePieceGreen
   m_EditorClassIdentifier: 
   firewallRule: {r: 0, g: 1, b: 0, a: 1}
+  sound: {fileID: 8300000, guid: 6c35cd60cae205143a07e4ae78b318b5, type: 3}

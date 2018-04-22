@@ -23,6 +23,10 @@ public class EnemyController : BaseGameObject
 
     public float life;
 
+    public AudioSource audioSource;
+
+    public AudioClip shotClip;
+
     private EnemyState movementState;
 
     private EnemyState shootState;
@@ -60,6 +64,7 @@ public class EnemyController : BaseGameObject
         if (Time.time >= _nextShotTime)
         {
             _nextShotTime = Time.time + timeBetweenShots;
+            audioSource.PlayOneShot(shotClip);
             FPSPlayerController.FPSPlayerInstance.Damage(shotDamage);
         }
     }

@@ -5,4 +5,6 @@ public class PuzzlePiece : ScriptableObject {
 
     public Color firewallRule;
 
+    public AudioClip sound;
+
 }

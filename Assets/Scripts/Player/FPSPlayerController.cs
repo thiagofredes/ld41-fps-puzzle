@@ -25,6 +25,9 @@ public class FPSPlayerController : BaseGameObject
 
     public int life;
 
+    public AudioSource audioSource;
+
+    public AudioClip damageClip;
 
     private static FPSPlayerController _instance;
 
@@ -64,6 +67,7 @@ public class FPSPlayerController : BaseGameObject
         if (!gameEnded && !gamePaused)
         {
             life = Mathf.Clamp(life - damage, 0, life);
+            audioSource.PlayOneShot(damageClip);
             if (LifeUpdate != null)
             {
                 LifeUpdate(life);

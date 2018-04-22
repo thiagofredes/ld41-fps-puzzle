@@ -50,11 +50,13 @@ public class UIManager : BaseGameObject
 
     protected override void OnGameEnded(bool success)
     {
+        base.OnGameEnded(success);
         if(success){
 			gameOverText.text = "SYSTEM OVERRIDEN. CONGRATULATIONS, THREAD NUMBER 41.";
 		}
 		else{
 			gameOverText.text = "SYSTEM OVERRIDE COMPROMISED. YOU'VE FAILED.";
 		}
+        gameOverText.enabled = true;
     }
 }

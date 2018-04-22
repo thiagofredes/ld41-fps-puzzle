@@ -14,6 +14,10 @@ public class ShootController : MonoBehaviour {
 
 	private float nextShotTime;
 
+	public AudioSource audioSource;
+
+	public AudioClip shotClip;
+
 
 	void Awake(){
 		nextShotTime = 0f;
@@ -21,6 +25,7 @@ public class ShootController : MonoBehaviour {
 	public void Shoot(){
 		if(Time.time >= nextShotTime){
 			nextShotTime = Time.time + timeBetweenShots;
+			audioSource.PlayOneShot(shotClip);
 			StartCoroutine(BulletCoroutine());
 		}
 	}

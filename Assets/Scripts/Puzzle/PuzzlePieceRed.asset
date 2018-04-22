@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Name: PuzzlePieceRed
   m_EditorClassIdentifier: 
   firewallRule: {r: 1, g: 0, b: 0, a: 1}
+  sound: {fileID: 8300000, guid: 91764794ee4b72b44ad03fe4968edcdf, type: 3}

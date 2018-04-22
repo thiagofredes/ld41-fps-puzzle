@@ -13,6 +13,8 @@ public class PuzzleSolver : BaseGameObject
 
     public EnemySpawner enemySpawner;
 
+    public AudioSource audioSource;
+
     private PuzzlePiece[] _levelPieces;
 
     private int _totalSteps;
@@ -68,7 +70,7 @@ public class PuzzleSolver : BaseGameObject
                 foreach (PuzzlePiece p in _levelPieces)
                 {
                     Shader.SetGlobalColor("_FlashColor", p.firewallRule);
-                    Shader.SetGlobalFloat("_FlashMultiplier", 0f);
+                    audioSource.PlayOneShot(p.sound);
                     yield return FlashColor();
                 }
             }
@@ -88,11 +90,12 @@ public class PuzzleSolver : BaseGameObject
             if (!gameEnded && !gamePaused)
             {
                 t += Time.deltaTime;
-                f = Mathf.Sin(t * 3.14f);
+                f = Mathf.Sin((t / flashTime) * 3.14f);
                 Shader.SetGlobalFloat("_FlashMultiplier", f);
             }
             yield return endOfFrame;
         }
+        Shader.SetGlobalFloat("_FlashMultiplier", 0f);
     }
 
     public void PutPiece(PuzzlePiece piece)
@@ -107,12 +110,10 @@ public class PuzzleSolver : BaseGameObject
             _currentLevel++;
             if (_currentLevel >= maxLevels)
             {
-                Debug.Log("GAME ENDED! CONGRATS");
                 GameManager.EndGame(true);
             }
             else
             {
-                Debug.Log("NEXT LEVEL!");
                 StopAllCoroutines();
                 Shader.SetGlobalFloat("_FlashMultiplier", 0f);
                 _totalSteps = Random.Range(2 + _currentLevel, 3 + _currentLevel);
