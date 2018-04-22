@@ -808,7 +808,7 @@ MonoBehaviour:
   shootController: {fileID: 1267626076}
   movementSpeed: 10
   gravity: 10
-  life: 1
+  life: 5
 --- !u!114 &1267626075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,7 +946,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SYSTEM OVERRIDEN. CONGRATULATIONS, THREAD NUMBER 41.
+  m_Text: 
 --- !u!222 &1337383121
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1327,7 +1327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a55eb9a8793974345b4a220ff0f57a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSeconds: 61
+  startSeconds: 60
+  timePenalty: 2
 --- !u!4 &1849014529
 Transform:
   m_ObjectHideFlags: 0

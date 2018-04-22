@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
 	public float startSeconds = 90f;
 
+	public float timePenalty = 2f;
+
 	private static bool paused = false;
 
 	private static bool gameOver = false;
@@ -19,6 +21,8 @@ public class GameManager : MonoBehaviour
 	public static event Action<bool> GameEnded;
 
 	public static event Action GameResumed;
+
+	private static GameManager _instance;
 
 	public static void Pause ()
 	{
@@ -37,6 +41,10 @@ public class GameManager : MonoBehaviour
 		if (GameEnded != null)
 			GameEnded (success);
 		gameOver = true;
+	}
+
+	void Awake(){
+		_instance = this;
 	}
 
 	void Start(){
@@ -59,13 +67,17 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public static void DiminishTimer(){
+		_instance.startSeconds = Mathf.Clamp(_instance.startSeconds -_instance.timePenalty, 0f, _instance.startSeconds);
+	}
+
 	private IEnumerator TickCoroutine()
 	{
 		YieldInstruction sleepASecond = new WaitForSeconds(1f);
 		while(startSeconds > 0f && !gameOver){
 			if(Tick != null)
 				Tick(startSeconds);
-			startSeconds -= 1f;
+			startSeconds = Mathf.Clamp(startSeconds - 1f, 0f, startSeconds);
 			yield return sleepASecond;
 		}
 	} 

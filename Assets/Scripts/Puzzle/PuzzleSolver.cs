@@ -124,12 +124,11 @@ public class PuzzleSolver : BaseGameObject
 
     private void Solve()
     {
-        //Debug.Log("CORRECT!");
         _currentStep++;
     }
 
     private void Punish()
     {
-        //Debug.Log("WRONG!");
+        GameManager.DiminishTimer();
     }
 }
