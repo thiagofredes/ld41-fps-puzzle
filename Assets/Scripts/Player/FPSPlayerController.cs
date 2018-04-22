@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class FPSPlayerController : BaseGameObject
 {
@@ -12,6 +13,8 @@ public class FPSPlayerController : BaseGameObject
         }
     }
 
+    public static event Action<int> LifeUpdate;
+
     public CharacterController characterController;
 
     public ShootController shootController;
@@ -20,9 +23,8 @@ public class FPSPlayerController : BaseGameObject
 
     public float gravity;
 
-    public float life;
+    public int life;
 
-    public int ammo;
 
     private static FPSPlayerController _instance;
 
@@ -30,6 +32,10 @@ public class FPSPlayerController : BaseGameObject
     void Awake()
     {
         _instance = this;
+        if (LifeUpdate != null)
+        {
+            LifeUpdate(life);
+        }
     }
 
     // Update is called once per frame
@@ -53,20 +59,31 @@ public class FPSPlayerController : BaseGameObject
         }
     }
 
-    public void Damage(float damage)
+    public void Damage(int damage)
     {
-        life -= damage;
-    }
-
-    public void AddAmmo(int amount)
-    {
-        Debug.Log("Ammo increased by " + amount);
-        ammo += amount;
+        if (!gameEnded && !gamePaused)
+        {
+            life = Mathf.Clamp(life - damage, 0, life);
+            if (LifeUpdate != null)
+            {
+                LifeUpdate(life);
+            }
+            if (life <= 0)
+            {
+                GameManager.EndGame(false);
+            }
+        }
     }
 
     public void AddHealth(int amount)
     {
-        Debug.Log("Received health " + amount);
-        life += amount;
+        if (!gameEnded && !gamePaused)
+        {
+            life += amount;
+            if (LifeUpdate != null)
+            {
+                LifeUpdate(life);
+            }
+        }
     }
 }

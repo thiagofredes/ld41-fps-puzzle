@@ -53,7 +53,6 @@ public class PuzzleSolver : BaseGameObject
         for (int p = 0; p < _totalSteps; p++)
         {
             _levelPieces[p] = possiblePieces[Random.Range(0, possiblePieces.Length)];
-            Debug.Log(_levelPieces[p].firewallRule);
         }
         _currentStep = 0;
     }

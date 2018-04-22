@@ -5,6 +5,6 @@ using UnityEngine;
 public class AmmoPickup : Pickup {	
 
 	protected override void OnContactDo(){
-        FPSPlayerController.FPSPlayerInstance.AddAmmo(Random.Range(1, 3));
+        //FPSPlayerController.FPSPlayerInstance.AddAmmo(Random.Range(1, 3));
     }
 }

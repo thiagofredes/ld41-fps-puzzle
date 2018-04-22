@@ -19,7 +19,7 @@ public class EnemyController : BaseGameObject
 
     public float shotProbability;
 
-    public float shotDamage;
+    public int shotDamage;
 
     public float life;
 

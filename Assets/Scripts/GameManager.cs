@@ -6,9 +6,13 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+	public float startSeconds = 90f;
+
 	private static bool paused = false;
 
 	private static bool gameOver = false;
+
+	public static event Action<float> Tick;
 
 	public static event Action GamePaused;
 
@@ -32,7 +36,13 @@ public class GameManager : MonoBehaviour
 	{
 		if (GameEnded != null)
 			GameEnded (success);
-		gameOver = !success;
+		gameOver = true;
+	}
+
+	void Start(){
+		if(Tick != null)
+			Tick(startSeconds);
+		StartCoroutine(TickCoroutine());
 	}
 
 	void Update ()
@@ -48,4 +58,15 @@ public class GameManager : MonoBehaviour
 			}
 		}
 	}
+
+	private IEnumerator TickCoroutine()
+	{
+		YieldInstruction sleepASecond = new WaitForSeconds(1f);
+		while(startSeconds > 0f && !gameOver){
+			if(Tick != null)
+				Tick(startSeconds);
+			startSeconds -= 1f;
+			yield return sleepASecond;
+		}
+	} 
 }
