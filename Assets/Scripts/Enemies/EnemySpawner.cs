@@ -94,19 +94,21 @@ public class EnemySpawner : BaseGameObject
 
     private int ChooseSpawnPoint()
     {
-        int index = 0;
-        float minimumAngle = 80f;
+        // int index = 0;
+        // float minimumAngle = 60f;
 
-        for (int sp = 0; sp < spawnPoints.Length; sp++)
-        {
-            Vector3 playerSpawnPointVector = spawnPoints[sp].position - FPSPlayerController.FPSPlayerInstance.transform.position;
-            float angle = Vector3.Angle(FPSPlayerController.FPSPlayerInstance.transform.forward, playerSpawnPointVector);
+        // for (int sp = 0; sp < spawnPoints.Length; sp++)
+        // {
+        //     Vector3 playerSpawnPointVector = spawnPoints[sp].position - FPSPlayerController.FPSPlayerInstance.transform.position;
+        //     float angle = Vector3.Angle(FPSPlayerController.FPSPlayerInstance.transform.forward, playerSpawnPointVector);
 
-            if (angle > minimumAngle)
-            {
-                index = sp;
-            }
-        }
-        return index;
+        //     if (angle > minimumAngle)
+        //     {
+        //         index = sp;
+        //     }
+        // }
+        // return index;
+
+        return Mathf.FloorToInt(Random.value * spawnPoints.Length);
     }
 }

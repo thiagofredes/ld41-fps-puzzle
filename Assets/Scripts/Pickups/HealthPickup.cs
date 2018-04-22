@@ -8,8 +8,10 @@ public class HealthPickup : Pickup {
 
     public AudioClip healthClip;
 
+    public int health;
+
 	protected override void OnContactDo(){
-        FPSPlayerController.FPSPlayerInstance.AddHealth(2);
+        FPSPlayerController.FPSPlayerInstance.AddHealth(health);
         audioSource.PlayOneShot(healthClip);
         StartCoroutine(WaitForSoundToPlay());
     }
