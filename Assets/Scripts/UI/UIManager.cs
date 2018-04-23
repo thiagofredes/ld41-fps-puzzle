@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : BaseGameObject
 {
@@ -61,11 +62,20 @@ public class UIManager : BaseGameObject
     {
         base.OnGameEnded(success);
         if(success){
-			gameOverText.text = "SYSTEM OVERRIDEN. CONGRATULATIONS, THREAD NUMBER 41.";
+			gameOverText.text = @"SYSTEM OVERRIDEN. CONGRATULATIONS,
+THREAD NUMBER 41.
+
+PRESS 'R' TO RESTART.
+PRESS 'Q' TO QUIT.";
 		}
 		else{
-			gameOverText.text = "SYSTEM OVERRIDE COMPROMISED. YOU'VE FAILED.";
+			gameOverText.text = @"SYSTEM OVERRIDE COMPROMISED.
+YOU'VE FAILED.
+
+PRESS 'R' TO RESTART.
+PRESS 'Q' TO QUIT.";
 		}
+        StartCoroutine(RestartCoroutine());
         gameOverText.enabled = true;
     }
 
@@ -76,5 +86,19 @@ public class UIManager : BaseGameObject
     private void OnNewStage(int numEnemies){
         remainingEnemies.text = numEnemies.ToString();
         correctEnemies.text = "0";
+    }
+
+    private IEnumerator RestartCoroutine(){
+        YieldInstruction waitFrame = new WaitForEndOfFrame();
+
+        while(true){
+            if(Input.GetKey(KeyCode.Q)){
+                Application.Quit();
+            }
+            else if(Input.GetKey(KeyCode.R)){
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            yield return waitFrame;
+        }
     }
 }

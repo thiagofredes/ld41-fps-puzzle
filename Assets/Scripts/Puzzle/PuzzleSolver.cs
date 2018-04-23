@@ -41,14 +41,18 @@ public class PuzzleSolver : BaseGameObject
     void Awake()
     {
         _instance = this;
+        Shader.SetGlobalFloat("_FlashMultiplier", 0f);
     }
 
     // Use this for initialization
-    void Start()
+    IEnumerator Start()
     {
         _currentLevel = 1;
         _totalSteps = 3;
         SetupLevel();
+
+        yield return new WaitForSeconds(2f);
+
         StartCoroutine(GiveTips());
         if(CorrectEnemy != null)
             CorrectEnemy(_currentStep);
