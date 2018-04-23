@@ -12,6 +12,11 @@ public class UIManager : BaseGameObject
 
 	public Text gameOverText;
 
+    public Text correctEnemies;
+
+    public Text remainingEnemies;
+
+
 
     void OnEnable()
     {
@@ -19,6 +24,8 @@ public class UIManager : BaseGameObject
         GameManager.Tick += OnTick;
         GameManager.GameEnded += OnGameEnded;
         FPSPlayerController.LifeUpdate += OnLifeUpdate;
+        PuzzleSolver.CorrectEnemy += OnCorrectEnemy;
+        PuzzleSolver.NewStage += OnNewStage;
     }
 
     void OnDisable()
@@ -27,6 +34,8 @@ public class UIManager : BaseGameObject
         GameManager.Tick -= OnTick;
         GameManager.GameEnded -= OnGameEnded;
         FPSPlayerController.LifeUpdate -= OnLifeUpdate;
+        PuzzleSolver.CorrectEnemy -= OnCorrectEnemy;
+        PuzzleSolver.NewStage -= OnNewStage;
     }
 
     void Awake()
@@ -58,5 +67,14 @@ public class UIManager : BaseGameObject
 			gameOverText.text = "SYSTEM OVERRIDE COMPROMISED. YOU'VE FAILED.";
 		}
         gameOverText.enabled = true;
+    }
+
+    private void OnCorrectEnemy(int enemyNumber){
+        correctEnemies.text = enemyNumber.ToString();
+    }
+
+    private void OnNewStage(int numEnemies){
+        remainingEnemies.text = numEnemies.ToString();
+        correctEnemies.text = "0";
     }
 }

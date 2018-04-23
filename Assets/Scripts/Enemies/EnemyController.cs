@@ -27,6 +27,12 @@ public class EnemyController : BaseGameObject
 
     public AudioClip shotClip;
 
+    public Transform shotOrigin;
+
+    public LineRenderer shotLine;
+
+    public Light shotMuzzle;
+
     private EnemyState movementState;
 
     private EnemyState shootState;
@@ -65,8 +71,38 @@ public class EnemyController : BaseGameObject
         {
             _nextShotTime = Time.time + timeBetweenShots;
             audioSource.PlayOneShot(shotClip);
-            FPSPlayerController.FPSPlayerInstance.Damage(shotDamage);
+            StartCoroutine(ShootCoroutine(targetPosition));            
         }
+    }
+
+    private IEnumerator ShootCoroutine(Vector3 targetPosition){
+        Ray ray = new Ray(shotOrigin.position, (targetPosition - shotOrigin.position).normalized);
+		RaycastHit raycastHit;
+        float bulletSpeed = 5f;
+		YieldInstruction endOfFrame = new WaitForEndOfFrame();
+
+		shotLine.SetPosition(0, shotOrigin.position);
+		shotLine.SetPosition(1, shotOrigin.position + shotOrigin.forward * bulletSpeed);		
+		shotLine.enabled = true;
+
+        shotMuzzle.enabled = true;
+
+		while(!Physics.Raycast(ray.origin, ray.direction, out raycastHit, bulletSpeed, ~LayerMask.GetMask("Enemies"))){
+			yield return endOfFrame;
+			shotLine.SetPosition(0, ray.origin);
+			ray.origin = ray.origin + ray.direction.normalized * bulletSpeed;			
+			shotLine.SetPosition(1, ray.origin);
+		}
+
+        shotMuzzle.enabled = false;
+		shotLine.enabled = false;
+		shotLine.SetPosition(0, shotOrigin.position);
+		shotLine.SetPosition(1, shotOrigin.position);
+
+		FPSPlayerController player = raycastHit.transform.GetComponent<FPSPlayerController>();
+		if(player != null){
+			player.Damage(shotDamage);
+		}
     }
 
     public void Damage(float damage)

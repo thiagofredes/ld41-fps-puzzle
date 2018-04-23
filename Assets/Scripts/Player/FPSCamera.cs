@@ -24,9 +24,17 @@ public class FPSCamera : BaseGameObject
             return rightOnGround.normalized;
         }
     }
-	public FPSPlayerController playerController;
 
-	public Vector3 playerPositionOffset;
+    public static Vector3 CameraPosition
+    {
+        get {
+            return _instance.transform.position;
+        }
+    }
+
+    public FPSPlayerController playerController;
+
+    public Vector3 playerPositionOffset;
 
     public float sensitivityX = 10f;
 
@@ -69,7 +77,7 @@ public class FPSCamera : BaseGameObject
         this.transform.rotation = Quaternion.Euler(
                                         (invertAxisY ? -1 : 1) * _currentY,
                                         _currentX,
-										0f);
-		transform.position = playerController.transform.position + playerPositionOffset;
+                                        0f);
+        transform.position = playerController.transform.position + playerPositionOffset;
     }
 }

@@ -12,7 +12,7 @@ public class EnemyStateShooting : EnemyState {
         float angle = Vector3.Angle(enemyPlayerVector, enemyRef.transform.forward);
 
         if(distance <= enemyRef.shootingDistance && angle <= enemyRef.shootingAngle && Random.value <= enemyRef.shotProbability){
-            enemyRef.Shoot(FPSPlayerController.FPSPlayerInstance.transform.position);
+            enemyRef.Shoot(FPSCamera.CameraPosition);
         }        
     }
 }

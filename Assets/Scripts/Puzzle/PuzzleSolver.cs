@@ -5,6 +5,10 @@ using UnityEngine;
 public class PuzzleSolver : BaseGameObject
 {
 
+    public static event System.Action<int> CorrectEnemy;
+
+    public static event System.Action<int> NewStage;
+
     public int maxLevels;
 
     public float timeBetweenTips;
@@ -46,6 +50,10 @@ public class PuzzleSolver : BaseGameObject
         _totalSteps = 3;
         SetupLevel();
         StartCoroutine(GiveTips());
+        if(CorrectEnemy != null)
+            CorrectEnemy(_currentStep);
+        if(NewStage != null)
+            NewStage(_totalSteps);
         enemySpawner.Spawn(_levelPieces);
     }
 
@@ -118,6 +126,10 @@ public class PuzzleSolver : BaseGameObject
                 Shader.SetGlobalFloat("_FlashMultiplier", 0f);
                 _totalSteps = Random.Range(2 + _currentLevel, 3 + _currentLevel);
                 SetupLevel();
+                if(CorrectEnemy != null)
+                    CorrectEnemy(_currentStep);
+                if(NewStage != null)
+                    NewStage(_totalSteps);
                 enemySpawner.Spawn(_levelPieces);
                 StartCoroutine(GiveTips());
             }
@@ -127,6 +139,8 @@ public class PuzzleSolver : BaseGameObject
     private void Solve()
     {
         _currentStep++;
+        if(CorrectEnemy != null)
+            CorrectEnemy(_currentStep);
     }
 
     private void Punish()
