@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
 	}
 
 	void Awake(){
+		gameOver = false;
+		paused = false;
 		_instance = this;
 	}
 
@@ -53,22 +55,25 @@ public class GameManager : MonoBehaviour
 		StartCoroutine(TickCoroutine());
 	}
 
-	void Update ()
-	{
-		if (!gameOver) {
-			if (Input.GetKeyDown (KeyCode.Escape)) {
-				if (!paused) {
-					Pause ();
-				} else {
-					Resume ();
-				}
-				paused = !paused;
-			}
-		}
-	}
+	// void Update ()
+	// {
+	// 	if (!gameOver) {
+	// 		if (Input.GetKeyDown (KeyCode.Escape)) {
+	// 			if (!paused) {
+	// 				Pause ();
+	// 			} else {
+	// 				Resume ();
+	// 			}
+	// 			paused = !paused;
+	// 		}
+	// 	}
+	// }
 
 	public static void DiminishTimer(){
 		_instance.startSeconds = Mathf.Clamp(_instance.startSeconds -_instance.timePenalty, 0f, _instance.startSeconds);
+		if(_instance.startSeconds <= 0){
+			EndGame(false);
+		}
 	}
 
 	private IEnumerator TickCoroutine()
@@ -79,6 +84,9 @@ public class GameManager : MonoBehaviour
 				Tick(startSeconds);
 			startSeconds = Mathf.Clamp(startSeconds - 1f, 0f, startSeconds);
 			yield return sleepASecond;
+			if(_instance.startSeconds <= 0){
+				EndGame(false);
+			}
 		}
 	} 
 }

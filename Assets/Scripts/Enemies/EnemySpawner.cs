@@ -69,7 +69,7 @@ public class EnemySpawner : BaseGameObject
     }
 
     private void SpawnSimpleEnemies(){
-        int num = Random.Range(2,4);
+        int num = 2;
         for(int e=0; e<num; e++){
             GameObject enemy = Instantiate(enemyPrefab, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity);
             EnemyController enemyController = enemy.GetComponent<EnemyController>();
@@ -85,7 +85,7 @@ public class EnemySpawner : BaseGameObject
 
         yield return waitSeconds;
 
-        while (true)
+        while (true && !gameEnded && !gamePaused)
         {
             yield return waitSeconds;
             SpawnPuzzleEnemies();

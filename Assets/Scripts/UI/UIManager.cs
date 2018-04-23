@@ -65,15 +65,15 @@ public class UIManager : BaseGameObject
 			gameOverText.text = @"SYSTEM OVERRIDEN. CONGRATULATIONS,
 THREAD NUMBER 41.
 
-PRESS 'R' TO RESTART.
-PRESS 'Q' TO QUIT.";
+INPUT 'R' TO RESTART.
+INPUT 'Q' TO QUIT.";
 		}
 		else{
 			gameOverText.text = @"SYSTEM OVERRIDE COMPROMISED.
 YOU'VE FAILED.
 
-PRESS 'R' TO RESTART.
-PRESS 'Q' TO QUIT.";
+INPUT 'R' TO RESTART.
+INPUT 'Q' TO QUIT.";
 		}
         StartCoroutine(RestartCoroutine());
         gameOverText.enabled = true;
