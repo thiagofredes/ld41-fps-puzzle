@@ -250,7 +250,7 @@ MonoBehaviour:
   gameResumed: 0
   afterDeath: {fileID: 0}
   navMeshAgent: {fileID: 195740075048283488}
-  shootingDistance: 45
+  shootingDistance: 50
   shootingAngle: 5
   timeBetweenShots: 1
   shotProbability: 1

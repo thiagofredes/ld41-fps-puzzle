@@ -376,7 +376,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 516033273}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 59.1, y: 0, z: -35.8}
+  m_LocalPosition: {x: -16.7, y: 0, z: -35.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 748548684}
@@ -590,6 +590,7 @@ Transform:
   - {fileID: 516033274}
   - {fileID: 1658052119}
   - {fileID: 97615043}
+  - {fileID: 1636925271}
   m_Father: {fileID: 2098123538}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -947,8 +948,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 971049691}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.52, y: 0, z: -25.1}
-  m_LocalScale: {x: 150.76169, y: 1, z: 10}
+  m_LocalPosition: {x: 22.38, y: 0, z: -25.1}
+  m_LocalScale: {x: 104.97076, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 1578347779}
   m_RootOrder: 4
@@ -1600,6 +1601,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1636925270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1636925271}
+  m_Layer: 0
+  m_Name: Spawn (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1636925271
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1636925270}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 59.1, y: 0, z: -10.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 748548684}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1658052118
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,6 +2180,7 @@ MonoBehaviour:
   - {fileID: 516033274}
   - {fileID: 1658052119}
   - {fileID: 97615043}
+  - {fileID: 1636925271}
   enemyPrefab: {fileID: 1546204387012888, guid: c538c96b646d5b845884eb15821e1fac,
     type: 2}
   lifePickupPrefab: {fileID: 1589094349324744, guid: 0518bdf83396f844daf2f56e0a6de3df,
@@ -2159,6 +2189,7 @@ MonoBehaviour:
     type: 2}
   puzzlePieceParticles: {fileID: 1922195757597614, guid: 1110e64341236494e8583223d0217a82,
     type: 2}
+  maxAllowedEnemies: 20
 --- !u!4 &2098123538
 Transform:
   m_ObjectHideFlags: 0

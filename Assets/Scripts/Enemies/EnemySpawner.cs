@@ -14,68 +14,87 @@ public class EnemySpawner : BaseGameObject
 
     public GameObject puzzlePieceParticles;
 
-    private Dictionary<PuzzlePiece, int> _enemiesAlive;
+    public int maxAllowedEnemies = 20;
 
     private Dictionary<PuzzlePiece, int> _enemiesRestriction;
 
     private Coroutine _spawnCoroutine = null;
 
+    private int _currentAliveEnemies;
 
+
+
+    void Awake()
+    {
+        _currentAliveEnemies = 0;
+    }
 
     public void Spawn(PuzzlePiece[] levelRestrictions)
     {
         _enemiesRestriction = new Dictionary<PuzzlePiece, int>();
-        _enemiesAlive = new Dictionary<PuzzlePiece, int>();
 
         foreach (PuzzlePiece pPiece in levelRestrictions)
         {
             if (!_enemiesRestriction.ContainsKey(pPiece))
             {
                 _enemiesRestriction.Add(pPiece, 1);
-                _enemiesAlive.Add(pPiece, 1);
             }
             else
             {
                 _enemiesRestriction[pPiece]++;
-                _enemiesAlive[pPiece]++;
             }
             SpawnPuzzleEnemies();
             SpawnSimpleEnemies();
         }
 
-        if(_spawnCoroutine == null){
+        if (_spawnCoroutine == null)
+        {
             StartCoroutine(SpawnCoroutine());
         }
+    }
+
+    private void OnEnemyKilled(EnemyController enemy)
+    {
+        _currentAliveEnemies--;
+        enemy.EnemyKilled -= OnEnemyKilled;
     }
 
     private void SpawnPuzzleEnemies()
     {
         foreach (PuzzlePiece pPiece in _enemiesRestriction.Keys)
         {
-            GameObject enemy = Instantiate(enemyPrefab, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity);
-            GameObject puzzlePc = Instantiate(puzzlePieceSpawnerPrefab, enemy.transform.position, Quaternion.identity);
-            GameObject pieceParticles = Instantiate(puzzlePieceParticles, enemy.transform.position, Quaternion.identity);
-            ExecutePuzzleStepAfterDeathAction puzzleAfterAction;
-            EnemyController enemyController = enemy.GetComponent<EnemyController>();
-            ParticleSystem.MainModule particlesMainModule = pieceParticles.GetComponent<ParticleSystem>().main;
-            particlesMainModule.startColor = pPiece.firewallRule;
-            pieceParticles.transform.parent = enemy.transform;
-            puzzlePc.transform.parent = enemy.transform;
-            puzzlePc.transform.localPosition = Vector3.zero;
-            puzzleAfterAction = puzzlePc.GetComponent<ExecutePuzzleStepAfterDeathAction>();
-            puzzleAfterAction.piece = pPiece;
-            enemyController.afterDeath = puzzleAfterAction;
+            if (_currentAliveEnemies < maxAllowedEnemies)
+            {
+                GameObject enemy = Instantiate(enemyPrefab, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity);
+                GameObject puzzlePc = Instantiate(puzzlePieceSpawnerPrefab, enemy.transform.position, Quaternion.identity);
+                GameObject pieceParticles = Instantiate(puzzlePieceParticles, enemy.transform.position, Quaternion.identity);
+                ExecutePuzzleStepAfterDeathAction puzzleAfterAction;
+                EnemyController enemyController = enemy.GetComponent<EnemyController>();
+                ParticleSystem.MainModule particlesMainModule = pieceParticles.GetComponent<ParticleSystem>().main;
+                particlesMainModule.startColor = pPiece.firewallRule;
+                pieceParticles.transform.parent = enemy.transform;
+                puzzlePc.transform.parent = enemy.transform;
+                puzzlePc.transform.localPosition = Vector3.zero;
+                puzzleAfterAction = puzzlePc.GetComponent<ExecutePuzzleStepAfterDeathAction>();
+                puzzleAfterAction.piece = pPiece;
+                enemyController.afterDeath = puzzleAfterAction;
+                enemyController.EnemyKilled += OnEnemyKilled;
+                _currentAliveEnemies++;
+            }
         }
     }
 
-    private void SpawnSimpleEnemies(){
-        int num = 2;
-        for(int e=0; e<num; e++){
+    private void SpawnSimpleEnemies()
+    {
+        int num = Mathf.Min(2, maxAllowedEnemies - _currentAliveEnemies);
+        for (int e = 0; e < num; e++)
+        {
             GameObject enemy = Instantiate(enemyPrefab, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity);
             EnemyController enemyController = enemy.GetComponent<EnemyController>();
             SpawnLifeAfterDeathAction healthAfterAction = enemy.AddComponent<SpawnLifeAfterDeathAction>();
             healthAfterAction.lifePrefab = lifePickupPrefab;
             enemyController.afterDeath = healthAfterAction;
+            _currentAliveEnemies++;
         }
     }
 
