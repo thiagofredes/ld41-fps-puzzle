@@ -1,6 +1,7 @@
 Library/
 Temp/
-Build[s]/
+[Bb]uild/
+[Bb]uilds/
 **/_*
 .vscode
 *.sln
