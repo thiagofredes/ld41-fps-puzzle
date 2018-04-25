@@ -11,6 +11,8 @@ public class UIManager : BaseGameObject
 
     public Text timerText;
 
+    public TimePenaltyAnimation timePenaltyAnimator;
+
 	public Text gameOverText;
 
     public Text correctEnemies;
@@ -23,6 +25,7 @@ public class UIManager : BaseGameObject
     {
         base.OnEnable();
         GameManager.Tick += OnTick;
+        GameManager.TickPenalty += OnTickPenalty;
         GameManager.GameEnded += OnGameEnded;
         FPSPlayerController.LifeUpdate += OnLifeUpdate;
         PuzzleSolver.CorrectEnemy += OnCorrectEnemy;
@@ -33,6 +36,7 @@ public class UIManager : BaseGameObject
     {
         base.OnDisable();
         GameManager.Tick -= OnTick;
+        GameManager.TickPenalty -= OnTickPenalty;
         GameManager.GameEnded -= OnGameEnded;
         FPSPlayerController.LifeUpdate -= OnLifeUpdate;
         PuzzleSolver.CorrectEnemy -= OnCorrectEnemy;
@@ -44,6 +48,11 @@ public class UIManager : BaseGameObject
         timerText.text = "";
         lifeText.text = "";
 		gameOverText.enabled = false;
+    }
+
+    private void OnTickPenalty(float tickSeconds){
+        OnTick(tickSeconds);
+        timePenaltyAnimator.Animate();
     }
 
     private void OnTick(float tickSeconds)

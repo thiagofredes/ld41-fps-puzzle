@@ -1601,6 +1601,100 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1582634727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1683736978856002, guid: f2039b0fddbb82349a6792612037f5d2,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1582634730}
+  - component: {fileID: 1582634729}
+  - component: {fileID: 1582634731}
+  - component: {fileID: 1582634728}
+  m_Layer: 5
+  m_Name: TimePenalty
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1582634728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114002616104306372, guid: f2039b0fddbb82349a6792612037f5d2,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1582634727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.341, b: 0.44951725, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
+--- !u!222 &1582634729
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222175225533162064, guid: f2039b0fddbb82349a6792612037f5d2,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1582634727}
+--- !u!224 &1582634730
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 224811076077123310, guid: f2039b0fddbb82349a6792612037f5d2,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1582634727}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1660150808}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 262, y: -20}
+  m_SizeDelta: {x: 500, y: 50}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &1582634731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114547125831671308, guid: f2039b0fddbb82349a6792612037f5d2,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1582634727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: e5008c9a5ea8d7442b8463f69c84a634, type: 3}
+    m_FontSize: 24
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 48
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 0
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: -02
 --- !u!1 &1636925270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1769,9 +1863,82 @@ Prefab:
       propertyPath: m_Text
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 224291305138649244, guid: f2039b0fddbb82349a6792612037f5d2,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224069731638750636, guid: f2039b0fddbb82349a6792612037f5d2,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 224170719964584206, guid: f2039b0fddbb82349a6792612037f5d2,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224232765597996416, guid: f2039b0fddbb82349a6792612037f5d2,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 224257202369062438, guid: f2039b0fddbb82349a6792612037f5d2,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224223801283094220, guid: f2039b0fddbb82349a6792612037f5d2,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114657532574730530, guid: f2039b0fddbb82349a6792612037f5d2,
+        type: 2}
+      propertyPath: timePenaltyAnimator
+      value: 
+      objectReference: {fileID: 1660150809}
+    - target: {fileID: 224069731638750636, guid: f2039b0fddbb82349a6792612037f5d2,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -57.90039
+      objectReference: {fileID: 0}
+    - target: {fileID: 224170719964584206, guid: f2039b0fddbb82349a6792612037f5d2,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -29.90039
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114285619095271692, guid: f2039b0fddbb82349a6792612037f5d2, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: f2039b0fddbb82349a6792612037f5d2, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1660150807 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1286048019951140, guid: f2039b0fddbb82349a6792612037f5d2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1660150806}
+--- !u!224 &1660150808 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224646489334161766, guid: f2039b0fddbb82349a6792612037f5d2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1660150806}
+--- !u!114 &1660150809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1660150807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1fb3ba7a2e26e47b2e5f7c6e816ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1582634731}
+  textOutline: {fileID: 1582634728}
+  animationDuration: 1
+  displacement: -15
+  textTintColor: {r: 1, g: 0, b: 0, a: 1}
+  outlineTintColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1804516667
 GameObject:
   m_ObjectHideFlags: 0

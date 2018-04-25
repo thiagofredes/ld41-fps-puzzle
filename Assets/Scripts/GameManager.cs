@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
 	public static event Action<float> Tick;
 
+	public static event Action<float> TickPenalty;
+
 	public static event Action GamePaused;
 
 	public static event Action<bool> GameEnded;
@@ -57,8 +59,8 @@ public class GameManager : MonoBehaviour
 
 	public static void DiminishTimer(){
 		_instance.startSeconds = Mathf.Clamp(_instance.startSeconds -_instance.timePenalty, 0f, _instance.startSeconds);
-		if(Tick != null)
-			Tick(_instance.startSeconds);
+		if(TickPenalty != null)
+			TickPenalty(_instance.startSeconds);
 		if(_instance.startSeconds <= 0){
 			EndGame(false);
 		}
