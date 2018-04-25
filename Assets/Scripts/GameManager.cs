@@ -55,22 +55,10 @@ public class GameManager : MonoBehaviour
 		StartCoroutine(TickCoroutine());
 	}
 
-	// void Update ()
-	// {
-	// 	if (!gameOver) {
-	// 		if (Input.GetKeyDown (KeyCode.Escape)) {
-	// 			if (!paused) {
-	// 				Pause ();
-	// 			} else {
-	// 				Resume ();
-	// 			}
-	// 			paused = !paused;
-	// 		}
-	// 	}
-	// }
-
 	public static void DiminishTimer(){
 		_instance.startSeconds = Mathf.Clamp(_instance.startSeconds -_instance.timePenalty, 0f, _instance.startSeconds);
+		if(Tick != null)
+			Tick(_instance.startSeconds);
 		if(_instance.startSeconds <= 0){
 			EndGame(false);
 		}

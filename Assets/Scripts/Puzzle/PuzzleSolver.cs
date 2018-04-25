@@ -120,7 +120,7 @@ public class PuzzleSolver : BaseGameObject
         if (_currentStep == _totalSteps)
         {
             _currentLevel++;
-            if (_currentLevel >= maxLevels)
+            if (_currentLevel > maxLevels)
             {
                 GameManager.EndGame(true);
             }
