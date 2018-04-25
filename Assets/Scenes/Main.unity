@@ -17,7 +17,7 @@ RenderSettings:
   serializedVersion: 8
   m_Fog: 1
   m_FogColor: {r: 0.096131295, g: 0.037926998, b: 0.097, a: 1}
-  m_FogMode: 2
+  m_FogMode: 3
   m_FogDensity: 0.07
   m_LinearFogStart: 0
   m_LinearFogEnd: 35.08
@@ -520,7 +520,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.1
+  m_Intensity: 0.2
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -539,7 +539,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
