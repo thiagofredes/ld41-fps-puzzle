@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class EnemySpawner : BaseGameObject
 {
+    public float spawnSeconds = 4f;
+
     public Transform[] spawnPoints;
 
     public GameObject enemyPrefab;
@@ -79,6 +81,8 @@ public class EnemySpawner : BaseGameObject
                 puzzleAfterAction.piece = pPiece;
                 enemyController.afterDeath = puzzleAfterAction;
                 enemyController.EnemyKilled += OnEnemyKilled;
+                enemyController.shotProbability = Random.Range(0.4f, 0.8f);
+                enemyController.shotAccuracy = Random.Range(0.3f, 0.6f);
                 _currentAliveEnemies++;
             }
         }
@@ -94,13 +98,15 @@ public class EnemySpawner : BaseGameObject
             SpawnLifeAfterDeathAction healthAfterAction = enemy.AddComponent<SpawnLifeAfterDeathAction>();
             healthAfterAction.lifePrefab = lifePickupPrefab;
             enemyController.afterDeath = healthAfterAction;
+            enemyController.shotProbability = Random.Range(0.3f, 0.7f);
+            enemyController.shotAccuracy = Random.Range(0.3f, 0.6f);
             _currentAliveEnemies++;
         }
     }
 
     private IEnumerator SpawnCoroutine()
     {
-        YieldInstruction waitSeconds = new WaitForSeconds(5f);
+        YieldInstruction waitSeconds = new WaitForSeconds(spawnSeconds);
 
         yield return waitSeconds;
 

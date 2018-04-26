@@ -604,7 +604,6 @@ GameObject:
   - component: {fileID: 831457201}
   - component: {fileID: 831457204}
   - component: {fileID: 831457202}
-  - component: {fileID: 831457203}
   m_Layer: 9
   m_Name: body
   m_TagString: Untagged
@@ -660,18 +659,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &831457203
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 831457200}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &831457204
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1188,7 +1175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotOrigin: {fileID: 970586952}
-  timeBetweenShots: 1
+  timeBetweenShots: 0.7
   bulletSpeed: 5
   bulletDamage: 1
   audioSource: {fileID: 1267626077}
@@ -1405,7 +1392,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1349993129}
   - component: {fileID: 1349993132}
-  - component: {fileID: 1349993131}
   - component: {fileID: 1349993130}
   m_Layer: 8
   m_Name: weapon
@@ -1462,18 +1448,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &1349993131
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1349993128}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1349993132
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2463,6 +2437,7 @@ MonoBehaviour:
   gamePaused: 0
   gameEnded: 0
   gameResumed: 0
+  spawnSeconds: 4
   spawnPoints:
   - {fileID: 1278682850}
   - {fileID: 553706403}

@@ -252,10 +252,12 @@ MonoBehaviour:
   navMeshAgent: {fileID: 195740075048283488}
   shootingDistance: 50
   shootingAngle: 5
-  timeBetweenShots: 1
+  timeBetweenShots: 1.2
   shotProbability: 1
+  shotAccuracy: 0
   shotDamage: 1
   life: 1
+  turnAroundSpeed: 0.15
   audioSource: {fileID: 82039839564199774}
   shotClip: {fileID: 8300000, guid: 0e8beff4fb4f28949b37d592abba37e3, type: 3}
   shotOrigin: {fileID: 4469938870590468}

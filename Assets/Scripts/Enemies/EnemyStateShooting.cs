@@ -9,10 +9,20 @@ public class EnemyStateShooting : EnemyState {
     public override void Update(){
         Vector3 enemyPlayerVector = FPSPlayerController.FPSPlayerInstance.transform.position - enemyRef.transform.position;
         float distance = enemyPlayerVector.sqrMagnitude;
-        float angle = Vector3.Angle(enemyPlayerVector, enemyRef.transform.forward);
+        float angle;
+        Vector3 currentVelocity = Vector3.zero;
 
-        if(distance <= enemyRef.shootingDistance && angle <= enemyRef.shootingAngle && Random.value <= enemyRef.shotProbability){
-            enemyRef.Shoot(FPSCamera.CameraPosition);
+        enemyPlayerVector.y = 0f;
+        angle = Vector3.Angle(enemyPlayerVector, enemyRef.transform.forward);  
+
+        if(distance <= enemyRef.shootingDistance && Random.value <= enemyRef.shotProbability){
+            if(angle > enemyRef.shootingAngle){
+                Vector3 newForward = Vector3.SmoothDamp(enemyRef.transform.forward, enemyPlayerVector, ref currentVelocity, enemyRef.turnAroundSpeed);
+                enemyRef.transform.rotation = Quaternion.LookRotation(newForward);
+            }
+            
+            if(angle < enemyRef.shootingAngle)
+                enemyRef.Shoot(FPSCamera.CameraPosition);
         }        
     }
 }

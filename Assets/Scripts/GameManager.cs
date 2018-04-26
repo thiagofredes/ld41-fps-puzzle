@@ -75,6 +75,8 @@ public class GameManager : MonoBehaviour
 			startSeconds = Mathf.Clamp(startSeconds - 1f, 0f, startSeconds);
 			yield return sleepASecond;
 			if(_instance.startSeconds <= 0){
+				if(Tick != null)
+					Tick(startSeconds);
 				EndGame(false);
 			}
 		}

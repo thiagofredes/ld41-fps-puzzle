@@ -19,9 +19,13 @@ public class EnemyController : BaseGameObject
 
     public float shotProbability;
 
+    public float shotAccuracy;
+
     public int shotDamage;
 
     public float life;
+
+    public float turnAroundSpeed = 0.5f;
 
     public AudioSource audioSource;
 
@@ -101,7 +105,8 @@ public class EnemyController : BaseGameObject
 
 		FPSPlayerController player = raycastHit.transform.GetComponent<FPSPlayerController>();
 		if(player != null){
-			player.Damage(shotDamage);
+            if(Random.value <= shotAccuracy)
+			    player.Damage(shotDamage);
 		}
     }
 
