@@ -1912,6 +1912,11 @@ Prefab:
         type: 2}
       propertyPath: increaseLifeAnimation
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114657532574730530, guid: f2039b0fddbb82349a6792612037f5d2,
+        type: 2}
+      propertyPath: updateLifeAnimation
+      value: 
       objectReference: {fileID: 1660150810}
     m_RemovedComponents:
     - {fileID: 114285619095271692, guid: f2039b0fddbb82349a6792612037f5d2, type: 2}
@@ -1952,15 +1957,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1660150807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe700fe21c2c93546b9b5eae834188ef, type: 3}
+  m_Script: {fileID: 11500000, guid: d2c24e76f11376e4ab1f8786b3501558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displacementAmount: -13
+  displacementAmount: 15
   animationDuration: 1
-  lifeIncreaseText: {fileID: 1878836486}
-  lifeIncreaseOutline: {fileID: 1878836483}
-  lifeIncreaseColor: {r: 0, g: 1, b: 0.07352948, a: 1}
+  lifeUpdateText: {fileID: 1878836486}
+  lifeUpdateOutline: {fileID: 1878836483}
+  lifeIncreaseColor: {r: 0.015686275, g: 1, b: 0, a: 1}
   lifeIncreaseOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+  lifeDecreaseColor: {r: 1, g: 0, b: 0, a: 1}
+  lifeDecreaseOutlineColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1804516667
 GameObject:
   m_ObjectHideFlags: 0
@@ -2152,7 +2159,7 @@ GameObject:
   - component: {fileID: 1878836486}
   - component: {fileID: 1878836483}
   m_Layer: 5
-  m_Name: LifeIncrease
+  m_Name: LifeUpdate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

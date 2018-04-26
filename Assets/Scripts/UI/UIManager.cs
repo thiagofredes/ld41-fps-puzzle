@@ -13,7 +13,7 @@ public class UIManager : BaseGameObject
 
     public TimePenaltyAnimation timePenaltyAnimator;
 
-    public IncreaseLifeAnimation increaseLifeAnimation;
+    public UpdateLifeAnimation updateLifeAnimation;
 
 	public Text gameOverText;
 
@@ -69,11 +69,12 @@ public class UIManager : BaseGameObject
     }
 
     private void OnLifeIncrease(int newLife){
-        increaseLifeAnimation.Animate();
+        updateLifeAnimation.AnimateIncrease();
         OnLifeUpdate(newLife);
     }
 
     private void OnLifeDecrease(int newLife){
+        updateLifeAnimation.AnimateDecrease();
         OnLifeUpdate(newLife);
     }
 
