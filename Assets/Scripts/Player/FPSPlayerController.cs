@@ -13,6 +13,10 @@ public class FPSPlayerController : BaseGameObject
         }
     }
 
+    public static event Action<int> LifeIncrease;
+
+    public static event Action<int> LifeDecrease;
+
     public static event Action<int> LifeUpdate;
 
     public CharacterController characterController;
@@ -34,7 +38,10 @@ public class FPSPlayerController : BaseGameObject
 
     void Awake()
     {
-        _instance = this;
+        _instance = this;        
+    }
+
+    void Start(){
         if (LifeUpdate != null)
         {
             LifeUpdate(life);
@@ -68,9 +75,9 @@ public class FPSPlayerController : BaseGameObject
         {
             life = Mathf.Clamp(life - damage, 0, life);
             audioSource.PlayOneShot(damageClip);
-            if (LifeUpdate != null)
+            if (LifeDecrease != null)
             {
-                LifeUpdate(life);
+                LifeDecrease(life);
             }
             if (life <= 0)
             {
@@ -84,9 +91,9 @@ public class FPSPlayerController : BaseGameObject
         if (!gameEnded && !gamePaused)
         {
             life += amount;
-            if (LifeUpdate != null)
+            if (LifeIncrease != null)
             {
-                LifeUpdate(life);
+                LifeIncrease(life);
             }
         }
     }

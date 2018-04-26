@@ -13,6 +13,8 @@ public class UIManager : BaseGameObject
 
     public TimePenaltyAnimation timePenaltyAnimator;
 
+    public IncreaseLifeAnimation increaseLifeAnimation;
+
 	public Text gameOverText;
 
     public Text correctEnemies;
@@ -28,6 +30,8 @@ public class UIManager : BaseGameObject
         GameManager.TickPenalty += OnTickPenalty;
         GameManager.GameEnded += OnGameEnded;
         FPSPlayerController.LifeUpdate += OnLifeUpdate;
+        FPSPlayerController.LifeIncrease += OnLifeIncrease;
+        FPSPlayerController.LifeDecrease += OnLifeDecrease;
         PuzzleSolver.CorrectEnemy += OnCorrectEnemy;
         PuzzleSolver.NewStage += OnNewStage;
     }
@@ -39,6 +43,8 @@ public class UIManager : BaseGameObject
         GameManager.TickPenalty -= OnTickPenalty;
         GameManager.GameEnded -= OnGameEnded;
         FPSPlayerController.LifeUpdate -= OnLifeUpdate;
+        FPSPlayerController.LifeIncrease -= OnLifeIncrease;
+        FPSPlayerController.LifeDecrease -= OnLifeDecrease;
         PuzzleSolver.CorrectEnemy -= OnCorrectEnemy;
         PuzzleSolver.NewStage -= OnNewStage;
     }
@@ -60,6 +66,15 @@ public class UIManager : BaseGameObject
         int minutes = Mathf.FloorToInt(tickSeconds / 60);
         int seconds = Mathf.FloorToInt(tickSeconds % 60);
         timerText.text = string.Format("Time remaining: {0}:{1:00}", minutes, seconds);
+    }
+
+    private void OnLifeIncrease(int newLife){
+        increaseLifeAnimation.Animate();
+        OnLifeUpdate(newLife);
+    }
+
+    private void OnLifeDecrease(int newLife){
+        OnLifeUpdate(newLife);
     }
 
     private void OnLifeUpdate(int newLife)

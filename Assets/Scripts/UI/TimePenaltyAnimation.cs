@@ -44,6 +44,7 @@ public class TimePenaltyAnimation : MonoBehaviour {
 
 	public void Animate(){
 		StopAllCoroutines();
+		ResetAnimation();
 		StartCoroutine(AnimatePenalty());
 	}
 
