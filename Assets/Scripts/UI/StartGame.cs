@@ -8,6 +8,8 @@ public class StartGame : MonoBehaviour {
 
 	public Text instructions;
 
+	public Text pressAnyButton;
+
 	public Button startButton;
 
 	public Text title;
@@ -20,6 +22,8 @@ public class StartGame : MonoBehaviour {
 	}
 
 	private IEnumerator WaitInput(){
+		yield return new WaitForSeconds(3f);
+		pressAnyButton.enabled = true;
 		while(true){
 			yield return new WaitForEndOfFrame();
 			if(Input.anyKey){
