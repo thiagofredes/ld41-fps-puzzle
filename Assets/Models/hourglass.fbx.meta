@@ -15,8 +15,10 @@ ModelImporter:
     2100002: hourglass-body
     2300000: body
     2300002: tips
+    2300004: //RootNode
     3300000: body
     3300002: tips
+    3300004: //RootNode
     4300000: tips
     4300002: body
   externalObjects:

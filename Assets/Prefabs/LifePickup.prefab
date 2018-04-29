@@ -73,7 +73,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1589094349324744}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: -0.5, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224569288698629202}
@@ -260,6 +260,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab761ead766fe240a1eac991042edf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oscilationAxis: {x: 0, y: 0, z: 1}
+  oscilationAmplitude: 0.5
+  oscilationFrequency: 2
+  rotationAxis: {x: 0, y: 0, z: 1}
+  rotationSpeed: 15
+  pickupRenderers:
+  - {fileID: 23610421906723802}
+  pickupCanvas: {fileID: 223186493556829382}
   audioSource: {fileID: 82531970437022742}
   healthClip: {fileID: 8300000, guid: 0af5be7501c1b5a429a2e6538e133fe1, type: 3}
   health: 1

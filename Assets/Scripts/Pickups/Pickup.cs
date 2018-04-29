@@ -3,25 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider), typeof(Rigidbody))]
-public class Pickup : MonoBehaviour {	
+public class Pickup : MonoBehaviour
+{
 
-	private SphereCollider _collider;
+    public Vector3 oscilationAxis;
 
-	private Rigidbody _rigidbody;
+	public float oscilationAmplitude = 0.5f;
+
+	public float oscilationFrequency = 2f;
+
+    public Vector3 rotationAxis;
+
+	public float rotationSpeed = 15f;
+
+    public Renderer[] pickupRenderers;
+
+    public Canvas pickupCanvas;
+
+    private SphereCollider _collider;
+
+    private Rigidbody _rigidbody;
+
+	protected bool _canContact;
 
 
 
-	void OnTriggerEnter(Collider other){
-		FPSPlayerController playerController = other.GetComponent<FPSPlayerController>();
-		if(playerController != null){
-			OnContactDo();			
-		}
+	void OnEnable(){
+		_canContact = true;
 	}
 
-	void Update(){
-		transform.position += Time.deltaTime * new Vector3(0f, 0f, 0.5f*Mathf.Sin(Time.time));
-		transform.Rotate(0f, 0f, Time.deltaTime * 15f);
-	}
+    void OnTriggerEnter(Collider other)
+    {
+        FPSPlayerController playerController = other.GetComponent<FPSPlayerController>();
+        if (playerController != null)
+        {
+            OnContactDo();
+        }
+    }
 
-	protected virtual void OnContactDo(){}
+    void Update()
+    {
+        transform.position += Time.deltaTime * transform.TransformDirection(oscilationAxis) * oscilationAmplitude * Mathf.Sin(oscilationFrequency * Time.time);
+        transform.Rotate(rotationAxis * Time.deltaTime * rotationSpeed);
+    }
+
+    protected virtual void OnContactDo() { }
 }

@@ -2055,7 +2055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startSeconds: 60
   timePenalty: 2
-  maxSeconds: 0
+  maxSeconds: 60
 --- !u!4 &1849014529
 Transform:
   m_ObjectHideFlags: 0
