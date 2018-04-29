@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
 	public float timePenalty = 2f;
 
+	public int maxSeconds;
+
 	private static bool paused = false;
 
 	private static bool gameOver = false;
@@ -55,6 +57,10 @@ public class GameManager : MonoBehaviour
 		if(Tick != null)
 			Tick(startSeconds);
 		StartCoroutine(TickCoroutine());
+	}
+
+	public static void IncreaseTimer(int seconds){
+		_instance.startSeconds = Mathf.Clamp(_instance.startSeconds + seconds, _instance.startSeconds, _instance.maxSeconds);
 	}
 
 	public static void DiminishTimer(){

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class EnemySpawner : BaseGameObject
 {
@@ -11,6 +12,8 @@ public class EnemySpawner : BaseGameObject
     public GameObject enemyPrefab;
 
     public GameObject lifePickupPrefab;
+
+    public GameObject timePickupPrefab;
 
     public GameObject puzzlePieceSpawnerPrefab;
 
@@ -33,32 +36,52 @@ public class EnemySpawner : BaseGameObject
 
     public void Spawn(PuzzlePiece[] levelRestrictions)
     {
-        _enemiesRestriction = new Dictionary<PuzzlePiece, int>();
+        // _enemiesRestriction = new Dictionary<PuzzlePiece, int>();
 
-        foreach (PuzzlePiece pPiece in levelRestrictions)
-        {
-            if (!_enemiesRestriction.ContainsKey(pPiece))
-            {
-                _enemiesRestriction.Add(pPiece, 1);
-            }
-            else
-            {
-                _enemiesRestriction[pPiece]++;
-            }
-            SpawnPuzzleEnemies();
-            SpawnSimpleEnemies();
-        }
+        // foreach (PuzzlePiece pPiece in levelRestrictions)
+        // {
+        //     if (!_enemiesRestriction.ContainsKey(pPiece))
+        //     {
+        //         _enemiesRestriction.Add(pPiece, 1);
+        //     }
+        //     else
+        //     {
+        //         _enemiesRestriction[pPiece]++;
+        //     }
+        //     SpawnPuzzleEnemies();
+        //     SpawnSimpleEnemies();
+        // }
 
-        if (_spawnCoroutine == null)
-        {
-            StartCoroutine(SpawnCoroutine());
-        }
+        // if (_spawnCoroutine == null)
+        // {
+        //     StartCoroutine(SpawnCoroutine());
+        // }
+        SpawnRunAwayEnemies();
     }
 
     private void OnEnemyKilled(EnemyController enemy)
     {
         _currentAliveEnemies--;
         enemy.EnemyKilled -= OnEnemyKilled;
+    }
+
+
+    private void SpawnRunAwayEnemies(){
+        int num = Mathf.Min(2, maxAllowedEnemies - _currentAliveEnemies);
+        for (int e = 0; e < 1; e++)
+        {
+            GameObject enemy = Instantiate(enemyPrefab, spawnPoints[0].position, Quaternion.identity);
+            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+            NavMeshAgent enemyNavMeshAgent = enemyController.GetComponent<NavMeshAgent>();
+            SpawnTimeAfterDeathAction timeAfterDeathAction = enemy.AddComponent<SpawnTimeAfterDeathAction>();
+            timeAfterDeathAction.timePrefab = timePickupPrefab;
+            enemyController.afterDeath = timeAfterDeathAction;
+            enemyController.SetMovementState(new EnemyStateRunningAway(enemyController, spawnPoints));            
+            enemyNavMeshAgent.stoppingDistance = 1f;
+            enemyNavMeshAgent.speed = 13f;
+            enemyNavMeshAgent.acceleration = 15f;
+            _currentAliveEnemies++;
+        }
     }
 
     private void SpawnPuzzleEnemies()
@@ -83,6 +106,8 @@ public class EnemySpawner : BaseGameObject
                 enemyController.EnemyKilled += OnEnemyKilled;
                 enemyController.shotProbability = Random.Range(0.4f, 0.8f);
                 enemyController.shotAccuracy = Random.Range(0.3f, 0.6f);
+                enemyController.SetMovementState(new EnemyStateFollowing(enemyController));
+                enemyController.SetShootState(new EnemyStateShooting(enemyController));
                 _currentAliveEnemies++;
             }
         }
@@ -100,6 +125,8 @@ public class EnemySpawner : BaseGameObject
             enemyController.afterDeath = healthAfterAction;
             enemyController.shotProbability = Random.Range(0.3f, 0.7f);
             enemyController.shotAccuracy = Random.Range(0.3f, 0.6f);
+            enemyController.SetMovementState(new EnemyStateFollowing(enemyController));
+            enemyController.SetShootState(new EnemyStateShooting(enemyController));
             _currentAliveEnemies++;
         }
     }

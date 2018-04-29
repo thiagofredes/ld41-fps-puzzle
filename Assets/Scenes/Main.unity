@@ -1162,7 +1162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3baba49c1fdaeaa48a27a5d257d6187b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorVisible: 1
+  cursorVisible: 0
 --- !u!114 &1267626076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1845,22 +1845,22 @@ Prefab:
     - target: {fileID: 224069731638750636, guid: f2039b0fddbb82349a6792612037f5d2,
         type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 224170719964584206, guid: f2039b0fddbb82349a6792612037f5d2,
         type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224232765597996416, guid: f2039b0fddbb82349a6792612037f5d2,
         type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 224257202369062438, guid: f2039b0fddbb82349a6792612037f5d2,
         type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 224223801283094220, guid: f2039b0fddbb82349a6792612037f5d2,
         type: 2}
@@ -2055,6 +2055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startSeconds: 60
   timePenalty: 2
+  maxSeconds: 0
 --- !u!4 &1849014529
 Transform:
   m_ObjectHideFlags: 0
@@ -2449,6 +2450,8 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1546204387012888, guid: c538c96b646d5b845884eb15821e1fac,
     type: 2}
   lifePickupPrefab: {fileID: 1589094349324744, guid: 0518bdf83396f844daf2f56e0a6de3df,
+    type: 2}
+  timePickupPrefab: {fileID: 1342297015716228, guid: 1aea6b4196bac7040948025c54584b7a,
     type: 2}
   puzzlePieceSpawnerPrefab: {fileID: 1519420024041234, guid: f4cebb202de750c47b92f1ff8fc8cb6c,
     type: 2}

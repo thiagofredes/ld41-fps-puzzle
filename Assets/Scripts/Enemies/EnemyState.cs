@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyState {
 
-    protected EnemyController enemyRef;
+    protected EnemyController _enemyRef;
 
     public virtual void OnEnter(){}
 	

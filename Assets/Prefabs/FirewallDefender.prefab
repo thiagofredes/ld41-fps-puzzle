@@ -258,6 +258,7 @@ MonoBehaviour:
   shotDamage: 1
   life: 1
   turnAroundSpeed: 0.15
+  runAwayDistance: 1
   audioSource: {fileID: 82039839564199774}
   shotClip: {fileID: 8300000, guid: 0e8beff4fb4f28949b37d592abba37e3, type: 3}
   shotOrigin: {fileID: 4469938870590468}

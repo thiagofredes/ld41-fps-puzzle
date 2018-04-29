@@ -23,7 +23,7 @@ public class EnemyController : BaseGameObject
 
     public int shotDamage;
 
-    public float life;
+    public float life;    
 
     public float turnAroundSpeed = 0.5f;
 
@@ -37,19 +37,45 @@ public class EnemyController : BaseGameObject
 
     public Light shotMuzzle;
 
-    private EnemyState movementState;
+    private EnemyState _movementState;
 
-    private EnemyState shootState;
+    private EnemyState _shootState;
 
     private float _nextShotTime;
+
+    private Coroutine _updateStatesCoroutine;
 
 
     void Start()
     {
-        movementState = new EnemyStateFollowing(this);
-        shootState = new EnemyStateShooting(this);
         _nextShotTime = 0f;
-        StartCoroutine(UpdateStates());
+        _updateStatesCoroutine = null;
+    }
+
+    public void SetMovementState(EnemyState newState){
+        if(_updateStatesCoroutine != null)
+            StopCoroutine(_updateStatesCoroutine);
+
+        if(_movementState != null){
+            _movementState.OnExit();
+        }
+        _movementState = newState;
+        _movementState.OnEnter();
+
+        _updateStatesCoroutine = StartCoroutine(UpdateStates());
+    }
+
+    public void SetShootState(EnemyState newState){
+        if(_updateStatesCoroutine != null)
+            StopCoroutine(_updateStatesCoroutine);
+
+        if(_shootState != null){
+            _shootState.OnExit();
+        }
+        _shootState = newState;
+        _shootState.OnEnter();
+
+        _updateStatesCoroutine = StartCoroutine(UpdateStates());
     }
 
     IEnumerator UpdateStates()
@@ -59,11 +85,13 @@ public class EnemyController : BaseGameObject
         {
             if (!gamePaused && !gameEnded)
             {
-                movementState.Update();
-                shootState.Update();
+                if(_movementState != null)
+                    _movementState.Update();
+                if(_shootState != null)
+                    _shootState.Update();
             }
             else{
-                movementState.Stop();                
+                _movementState.Stop();                
             }
             yield return endOfFrame;
         }
