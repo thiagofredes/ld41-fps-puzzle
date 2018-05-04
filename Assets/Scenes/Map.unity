@@ -141,11 +141,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelChunk: {fileID: 1820510112990332, guid: e1426e95f1890fa46890fd1024e45d74, type: 2}
-  levelChunkWidth: 5
-  levelChunkHeight: 5
-  mapWidth: 5
-  mapHeight: 5
-  granularity: 0.5
+  roomWidth: 2
+  roomHeight: 2
+  mapWidth: 30
+  mapHeight: 30
+  chunkFrequency: 0.5
 --- !u!4 &981462322
 Transform:
   m_ObjectHideFlags: 0

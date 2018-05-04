@@ -8,9 +8,9 @@ public class MapGenerator : MonoBehaviour
     // what a single level chunk is like
     public GameObject levelChunk;
 
-    public float levelChunkWidth;
+    public int roomWidth;
 
-    public float levelChunkHeight;
+    public int roomHeight;
 
     // how many chunks in width the level has
     public int mapWidth;
@@ -27,7 +27,8 @@ public class MapGenerator : MonoBehaviour
 
 
 
-    void Awake(){
+    void Awake()
+    {
         mapSeed = (float)System.DateTime.Now.Second;
     }
 
@@ -38,7 +39,6 @@ public class MapGenerator : MonoBehaviour
         ResetMap();
         for (int x = 0; x < mapWidth; x++)
         {
-            level[x] = new GameObject[mapHeight];
             for (int z = 0; z < mapHeight; z++)
             {
                 float xCoord = (float)x + mapSeed + startX;
@@ -46,7 +46,40 @@ public class MapGenerator : MonoBehaviour
                 float v = Mathf.PerlinNoise(xCoord, yCoord);
                 if (v > chunkFrequency)
                 {
-                    level[x][z] = Instantiate(levelChunk, new Vector3(x * levelChunkWidth, 0f, z * levelChunkHeight), Quaternion.identity) as GameObject;
+                    InstantiateRoom(x, z);
+                }
+            }
+        }
+    }
+
+    private void InstantiateRoom(int xCoord, int zCoord)
+    {
+        int startX = xCoord - Mathf.FloorToInt(roomWidth / 2f) - 1;
+        int startY = zCoord - Mathf.FloorToInt(roomHeight / 2f) - 1;
+        int endX = xCoord + Mathf.FloorToInt(roomWidth / 2f) + 1;
+        int endY = zCoord + Mathf.FloorToInt(roomHeight / 2f) + 1;
+        List<GameObject> instantiatedChunks = new List<GameObject>();
+
+        if (startX > 0 && startY > 0 && endX < mapWidth && endY < mapHeight)
+        {
+            for (int x = startX; x < endX; x++)
+            {
+                for (int y = startY; y < endY; y++)
+                {
+                    if (level[x][y] != null)
+                    {
+                        foreach (GameObject go in instantiatedChunks)
+                        {
+                            Destroy(go);
+                        }
+                        instantiatedChunks.Clear();
+                        return;
+                    }
+                    else
+                    {
+                        level[x][y] = Instantiate(levelChunk, new Vector3(x, 0f, y), Quaternion.identity) as GameObject;
+                        instantiatedChunks.Add(level[x][y]);
+                    }
                 }
             }
         }
@@ -54,8 +87,10 @@ public class MapGenerator : MonoBehaviour
 
     private void ResetMap()
     {
-        DestroyAll();        
+        DestroyAll();
         level = new GameObject[mapWidth][];
+        for (int l = 0; l < mapWidth; l++)
+            level[l] = new GameObject[mapHeight];
     }
 
     private void DestroyAll()
