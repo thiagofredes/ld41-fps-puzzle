@@ -14,6 +14,9 @@ public class MapGeneratorEditor : Editor {
             myScript.GenerateLevel();
         }
 
+        if(GUILayout.Button("Clear")){
+            myScript.Clear();
+        }
     }
 
 }

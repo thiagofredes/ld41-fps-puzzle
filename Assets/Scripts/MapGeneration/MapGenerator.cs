@@ -12,6 +12,10 @@ public class MapGenerator : MonoBehaviour
 
     public int roomHeight;
 
+    public int roomBorderX;
+
+    public int roomBorderY;
+
     // how many chunks in width the level has
     public int mapWidth;
 
@@ -30,6 +34,10 @@ public class MapGenerator : MonoBehaviour
     void Awake()
     {
         mapSeed = (float)System.DateTime.Now.Second;
+    }
+
+    public void Clear(){
+        ResetMap();
     }
 
     public void GenerateLevel()
@@ -54,10 +62,10 @@ public class MapGenerator : MonoBehaviour
 
     private void InstantiateRoom(int xCoord, int zCoord)
     {
-        int startX = xCoord - Mathf.FloorToInt(roomWidth / 2f) - 1;
-        int startY = zCoord - Mathf.FloorToInt(roomHeight / 2f) - 1;
-        int endX = xCoord + Mathf.FloorToInt(roomWidth / 2f) + 1;
-        int endY = zCoord + Mathf.FloorToInt(roomHeight / 2f) + 1;
+        int startX = xCoord - Mathf.FloorToInt(roomWidth / 2f) - roomBorderX;
+        int startY = zCoord - Mathf.FloorToInt(roomHeight / 2f) - roomBorderY;
+        int endX = xCoord + Mathf.FloorToInt(roomWidth / 2f) + roomBorderX;
+        int endY = zCoord + Mathf.FloorToInt(roomHeight / 2f) + roomBorderY;
         List<GameObject> instantiatedChunks = new List<GameObject>();
 
         if (startX > 0 && startY > 0 && endX < mapWidth && endY < mapHeight)
@@ -75,7 +83,10 @@ public class MapGenerator : MonoBehaviour
                         instantiatedChunks.Clear();
                         return;
                     }
-                    else
+                    else if(x >= startX + roomBorderX &&
+                            y >= startY + roomBorderY &&
+                            x <= endX - roomBorderX &&
+                            y <= endY - roomBorderY)
                     {
                         level[x][y] = Instantiate(levelChunk, new Vector3(x, 0f, y), Quaternion.identity) as GameObject;
                         instantiatedChunks.Add(level[x][y]);
