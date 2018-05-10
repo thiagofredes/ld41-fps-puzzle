@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using MapGen;
 
 [CustomEditor(typeof(MapGenerator))]
 public class MapGeneratorEditor : Editor {
